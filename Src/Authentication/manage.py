@@ -1,16 +1,13 @@
 import os
 import json
-from sign_up import Sign_up
-from sign_in  import Sign_in
 
 USER_FILE = 'users.json'
-
 def init_user_file():
     if not os.path.exists(USER_FILE):
         with open(USER_FILE, 'w') as f:
             json.dump([], f)
 
-def main():
+def main(): 
     init_user_file()
 
     while True:

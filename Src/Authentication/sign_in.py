@@ -10,10 +10,10 @@ def main():
         elif choice == '2':
             print("Sign Up option not yet implemented.")  
         elif choice == '3':
-            print("Goodbye!")
-            break
-        else:
-            print("Invalid option. Try again.")
+         print("Goodbye!")
+        break
+    else:
+     print("Invalid option. Try again.")
 
 if __name__ == "__main__":
     main ()

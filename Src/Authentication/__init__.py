@@ -10,10 +10,10 @@ def init_user_file():
 def load_users():
     try:
         with open(USER_FILE, 'r') as f:
-            data = json.load(f)
-            if isinstance(data, list):
+         data = json.load(f)
+        if isinstance(data, list):
                 return data
-            else:
+        else:
                 return []
     except json.JSONDecodeError:
         return []
