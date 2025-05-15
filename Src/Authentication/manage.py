@@ -17,7 +17,7 @@ def main():
         print("\n1. Sign Up")
         print("2. Sign In")
         print("3. Exit")
-        choice = input("Choose an option: ")
+        choice = input(" Choose an option: ")
 
         if choice == '1':
             Sign_up()

@@ -29,7 +29,7 @@ def sign_up():
     for user in users:
         if user['email'] == email:
             print("Email already exists. Please try again.")
-            return
+        return
 
     users.append({'email': email, 'password': password, 'role': role})
     save_users(users)
