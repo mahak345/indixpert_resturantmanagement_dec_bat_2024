@@ -1,0 +1,9 @@
+[
+    {
+        "email": "user@example.com",
+        "password": "password123",
+        "role": "user",
+        "contact": "1234567890",
+        "address": "123, Some Street, City"
+     }
+]
