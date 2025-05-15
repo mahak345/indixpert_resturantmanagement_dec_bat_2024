@@ -1,0 +1,16 @@
+[
+    {
+        "item_id": 1,
+        "name": "Paneer Tikka",
+        "portion": "full",
+        "quantity": 2,
+        "price": 190
+    },
+    {
+        "item_id": 9,
+        "name": "Hyderabadi Biryani",
+        "portion": "half",
+        "quantity": 3,
+        "price": 160
+    }
+]

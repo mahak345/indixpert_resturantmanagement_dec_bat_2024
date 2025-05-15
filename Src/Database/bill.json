@@ -1,0 +1,19 @@
+{
+    "items": [
+        {
+            "name": "Paneer Tikka",
+            "portion": "half",
+            "quantity": 2,
+            "unit_price": 140,
+            "total": 280
+        },
+        {
+            "name": "Butter Naan",
+            "portion": "full",
+            "quantity": 3,
+            "unit_price": 80,
+            "total": 240
+        }
+    ],
+    "grand_total": 520
+}
