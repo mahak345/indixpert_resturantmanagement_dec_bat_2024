@@ -15,6 +15,8 @@ def Sign_up():
     print("== Sign Up ==")
     email = input("Enter email: ")
     password = input("Enter password: ")
+    address=input("Enter address:")
+    contract=input("Enter contract:")
     role = input("Enter role (user/admin/staff): ").lower()
 
     if role not in ['user', 'admin', 'staff']:

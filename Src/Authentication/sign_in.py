@@ -1,19 +1,13 @@
-from sign_in import sign_in
+# sign_in.py
 
-def main():
-    while True:
-        print("\n1. Sign In\n2. Sign Up\n3. Exit")
-        choice = input("Choose an option: ")
+def sign_in(users):
+    username = input("Enter username: ")
+    password = input("Enter password: ")
 
-        if choice == '1':
-             sign_in()
-        elif choice == '2':
-            print("Sign Up option not yet implemented.")  
-         elif choice == '3':
-         print("Goodbye!")
-        break
+    user = users.get(username)
+    if user and user["password"] == password:
+        print("Sign in successful!")
+        print("Contract:", user["contract"])
+        print("Address:", user["address"])
     else:
-     print("Invalid option. Try again.")
-
-if __name__ == "__main__":
-    main ()
+        print("Invalid username or password.")
