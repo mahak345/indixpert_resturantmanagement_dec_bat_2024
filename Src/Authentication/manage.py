@@ -5,12 +5,12 @@ USER_FILE = 'users.json'
 def init_user_file():
     if not os.path.exists(USER_FILE):
         with open(USER_FILE, 'w') as f:
-            json.dump([], f)
+             json.dump([], f)
 
 def main(): 
     init_user_file()
 
-    while True:
+     while True:
         print("\n1. Sign Up")
         print("2. Sign In")
         print("3. Exit")

@@ -6,10 +6,10 @@ def main():
         choice = input("Choose an option: ")
 
         if choice == '1':
-            sign_in()
+             sign_in()
         elif choice == '2':
             print("Sign Up option not yet implemented.")  
-        elif choice == '3':
+         elif choice == '3':
          print("Goodbye!")
         break
     else:
