@@ -1,33 +1,48 @@
 import json
 import os
+import re
 
-USER_FILE = 'users.json'
+USERS_FILE =  "users.json"
 
 def load_users():
-    try:
-           with  open(USER_FILE, 'r') as f:
-            data = json.load(f)
-            return data if isinstance(data, list) else []
-    except (json.JSONDecodeError, FileNotFoundError):
-         return []
+    if not os.path.exists(USERS_FILE):
+        return [] 
+    with open(USERS_FILE, "r") as f:
+        return json.load(f)
 
-def Sign_up(): 
-    print("== Sign Up ==")
-    email = input("Enter email: ")
-    password = input("Enter password: ")
-    address=input("Enter address:")
-    contract=input("Enter contract:")
-    role = input("Enter role (user/admin/staff): ").lower()
+def save_users(users):
+    with open(USERS_FILE, "w") as f:
+        json.dump(users, f, indent=2)
 
-    if role not in ['user', 'admin', 'staff']:
-        print("Invalid role. Please choose from user/admin/staff.")
+def sign_up():
+    print("\n--- Sign Up ---")
+    username = input("Enter a new username: ")
+    password = input("Enter a new password: ")
+    contact = input("Enter your contact number: ")
+    address = input("Enter your address (max 100 chars): ")
+    if len(address) > 100:
+        address = address[:100]
+        print("Address truncated to 100 characters.")
+    email = input("Enter your email: ")
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+        print("Invalid email format.")
         return
 
     users = load_users()
-    for user in users:
-        if user['email'] == email:
-            print("Email already exists. Please try again.")
+
+    # Check duplicate username
+    if any(u['username'] == username for u in users):
+        print("Username already exists.")
         return
 
-    users.append({'email': email, 'password': password, 'role': role})
-    print("User registered successfully!")
+    users.append({
+        "username": username,
+        "password": password,
+        "contact": contact,
+        "address": address,
+        "email": email
+    })
+    save_users(users)
+    print("Sign up successful!")
+
+
