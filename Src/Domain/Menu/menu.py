@@ -25,6 +25,7 @@ menu_items = [
     {"id": 24, "name": "Masala Uttapam", "half_price": 90, "full_price": 150, "category": "Breakfast"},
 ]
 
+
 fixed_item = {
     "id": 100,
     "name": "Water Bottle",
