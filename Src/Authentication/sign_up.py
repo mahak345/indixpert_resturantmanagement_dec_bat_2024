@@ -2,11 +2,11 @@ import json
 import os
 import re
 
-USERS_FILE =  "users.json"
+USERS_FILE = "users.json"
 
 def load_users():
     if not os.path.exists(USERS_FILE):
-        return [] 
+        return []
     with open(USERS_FILE, "r") as f:
         return json.load(f)
 
@@ -29,9 +29,7 @@ def sign_up():
         return
 
     users = load_users()
-
-    # Check duplicate username
-    if any(u['username'] == username for u in users):
+    if any(u.get('username') == username for u in users):
         print("Username already exists.")
         return
 
@@ -44,5 +42,3 @@ def sign_up():
     })
     save_users(users)
     print("Sign up successful!")
-
-
