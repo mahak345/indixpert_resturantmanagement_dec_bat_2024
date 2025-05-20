@@ -1,73 +1,63 @@
-from Src.Authentication.sign_up import sign_up
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from Src.Authentication.sign_in import sign_in
+from Src.Authentication.sign_up import sign_up
 from Src.Authentication.exit_program import exit_program
-
-def main():
-    print("Welcome to the Vegetarian Restaurant Management System!")
-
-    is_logged_in = False
-
+from Src.Domain.Bill.Generate_bill import generate_bill
+from Src.Domain.Booking.tablebooking import table_booking
+from Src.Domain.Menu.menu import show_menu
+from Src.Domain.order.order_class import place_order
+from Src.logs.restaurant_logs import log_event 
+def main_menu():
     while True:
-        print("\nMain Menu")
-        print("1. Sign Up")
-        print("2. Sign In")
+        print("\n--- Welcome to Vegetarian Restaurant Management System ---")
+        print("1. Sign In")
+        print("2. Sign Up")
         print("3. Exit")
-        choice = input("Enter your choice: ")
-
-from Src.Menu._menu import view_menu
-from Src.order.place_order import place_order
-from Src.Bill.Generate_bill import generate_bill
-from Src.TableBooking.book_table import book_table
-
-def main():
-    print("Welcome to the Vegetarian Restaurant Management System!")
-
-    is_logged_in = False
-
-    while True:
-        print("\nMain Menu")
-        print("1. Sign Up")
-        print("2. Sign In")
-        print("3. View Menu")
-        print("4. Place Order")
-        print("5. Generate Bill")
-        print("6. Book Table")
-        print("7. Exit")
-        
-        choice = input("Enter your choice: ")
+        choice = input("Enter your choice: ").strip()
 
         if choice == '1':
-            sign_up()
+            if sign_in():
+                logged_in_menu()
+                break
         elif choice == '2':
-            is_logged_in = sign_in()
-            if is_logged_in:
-                print("Successfully signed in.")
-            else:
-                print("Sign-in failed.")
+            sign_up()
         elif choice == '3':
-            if is_logged_in:
-                view_menu()
-            else:
-                print("Please sign in first.")
-        elif choice == '4':
-            if is_logged_in:
-                place_order()
-            else:
-                print("Please sign in first.")
-        elif choice == '5':
-            if is_logged_in:
-                generate_bill()
-            else:
-                print("Please sign in first.")
-        elif choice == '6':
-            if is_logged_in:
-                book_table()
-            else:
-                print("Please sign in first.")
-        elif choice == '7':
             exit_program()
         else:
-            print("Invalid choice. Please try again.")
+            print("Invalid choice. Please select 1, 2, or 3.")
+
+
+def logged_in_menu():
+    while True:
+        print("\n--- Main Dashboard ---")
+        print("1. Display Menu")
+        print("2. Take Order")
+        print("3. Book Table")
+        print("4. Generate Bill")
+        print("5. Log Out")
+
+        choice = input("Enter your choice: ").strip()
+
+        if choice == '1':
+            show_menu()
+            log_event("Displayed Menu")
+        elif choice == '2':
+            place_order()
+            log_event("Order Taken")
+        elif choice == '3':
+            table_booking()
+            log_event("Table Booked")
+        elif choice == '4':
+            generate_bill()
+            log_event("Bill Generated")
+        elif choice == '5':
+            print("Logging out...\n")
+            break
+        else:
+            print("Invalid option. Please select between 1 and 5.")
 
 if __name__ == "__main__":
-    main()
+    main_menu()
