@@ -15,9 +15,9 @@
             "unit_price": 80,
             "total": 240
         }
-        
     ],
     "grand_total": 520
 }
 {"orders": [{"item_id": 2, "item_name": "Vegetable Biryani", "portion": "full", "price": 225, "quantity": 2, "total": 450}, {"item_id": 1, "item_name": "Paneer Tikka", "portion": "full", "price": 190, "quantity": 5, "total": 950}], "total": 1400}
+{"orders": [{"item_id": 2, "item_name": "Vegetable Biryani", "portion": "full", "price": 225, "quantity": 2, "total": 450}, {"item_id": 1, "item_name": "Paneer Tikka", "portion": "half", "price": 140, "quantity": 2, "total": 280}], "total": 730}
 {"orders": [{"item_id": 2, "item_name": "Vegetable Biryani", "portion": "full", "price": 225, "quantity": 2, "total": 450}, {"item_id": 1, "item_name": "Paneer Tikka", "portion": "half", "price": 140, "quantity": 2, "total": 280}], "total": 730}
