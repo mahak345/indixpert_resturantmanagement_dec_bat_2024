@@ -1,2 +1,1 @@
-def book_table():
-    print("Table booked successfully!")
+from .tablebooking import table_booking

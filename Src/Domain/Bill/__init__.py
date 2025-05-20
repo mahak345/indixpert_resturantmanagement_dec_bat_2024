@@ -1,3 +1,1 @@
-class Generate_bill:
-    def create_bill(self):
-        print("Bill is being generated...")
+from .Generate_bill import generate_bill

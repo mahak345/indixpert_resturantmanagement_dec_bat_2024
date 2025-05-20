@@ -1,39 +1,52 @@
-from datetime import datetime, timedelta
+import json
+import os
+import logging
+from datetime import datetime
 
-class Table:
-    def __init__(self, table_number):
-        self.table_number = table_number
-        self.bookings = []
+BOOKING_DB = os.path.join(os.path.dirname(__file__),"../../logs/Database/booking.json")
+LOG_FILE = os.path.join(os.path.dirname(__file__),"../../logs/restaurant.log")
 
-    def is_available(self, new_time):
-        for booking in self.bookings:
-            if abs((booking - new_time).total_seconds()) < 2 * 3600:
-                return False
-        return True
+logging.basicConfig(
+    filename=LOG_FILE,
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
-    def book_table(self, booking_time):
-        if self.is_available(booking_time):
-            self.bookings.append(booking_time)
-            print(f"Table {self.table_number} successfully booked for {booking_time.strftime('%Y-%m-%d %H:%M')}.")
-        else:
-            print (f"Table {self.table_number} is not available within 2 hours of {booking_time.strftime('%H:%M')}.")
+def table_booking():
+    name = input("Enter your name: ").strip()
+    people = input("Number of people: ").strip()
+    date = input("Enter booking date (YYYY-MM-DD): ").strip()
+    time = input("Enter booking time (HH:MM): ").strip()
 
-    def cancel_booking(self, booking_time):
-        for i, booked_time in enumerate(self.bookings):
-            if booked_time == booking_time:
-                del self.bookings[i]
-                print(f"Booking at {booking_time.strftime('%H:%M')} for table {self.table_number} has been canceled.")
-                return
-        print(f"No booking found at {booking_time.strftime('%H:%M')} for table {self.table_number}.")
+    if not people.isdigit() or int(people) <= 0:
+        print("Invalid number of people.")
+        return
 
-class BookingSystem:
-    def __init__(self, num_tables):
-        self.tables = [Table(i) for i in range(1, num_tables + 1)]
+    try:
+        datetime.strptime(date, "%Y-%m-%d")
+        datetime.strptime(time, "%H:%M")
+    except ValueError:
+        print("Invalid date or time format.")
+        return
 
-    def check_availability(self, table_number, booking_time):
-        table = self.tables[table_number - 1]
-        table.book_table(booking_time)
+    booking = {
+        "name": name,
+        "people": int(people),
+        "date": date,
+        "time": time
+    }
+    bookings = []
+    if os.path.exists(BOOKING_DB):
+        with open(BOOKING_DB, 'r') as f:
+            try:
+                bookings = json.load(f)
+            except json.JSONDecodeError:
+                bookings = []
+    bookings.append(booking)
 
-    def cancel_reservation(self, table_number, booking_time):
-        table = self.tables[table_number - 1]
-        table.cancel_booking(booking_time)
+    with open(BOOKING_DB, 'w') as f:
+        json.dump(bookings, f, indent=4)
+
+    print(" Table booked successfully!")
+    logging.info(f"New booking: {booking['name']} for {booking['people']} people on {booking['date']} at {booking['time']}.")
+
