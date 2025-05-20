@@ -1,0 +1,19 @@
+[
+    {
+        "item_id": 2,
+        "item_name": "Vegetable Biryani",
+        "portion": "full",
+        "price": 225,
+        "quantity": 2,
+        "total": 450
+    },
+    
+    {
+        "item_id": 1,
+        "item_name": "Paneer Tikka",
+        "portion": "half",
+        "price": 140,
+        "quantity": 2,
+        "total": 280
+    }
+]

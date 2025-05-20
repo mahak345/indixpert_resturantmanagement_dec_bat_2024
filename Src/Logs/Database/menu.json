@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Paneer Tikka",
+    "category": "Lunch",
+    "portions": {
+      "half": { "price": 140 },
+      "full": { "price": 190 }
+    }
+  },
+  
+  {
+    "id": 2,
+    "name": "Vegetable Biryani",
+    "category": "Dinner",
+    "portions": {
+      "full": { "price": 225 },
+      "half": { "price": 140 }
+    }
+  },
+  {
+    "id": 3,
+    "name": "Masala Dosa",
+    "category": "Lunch",
+    "portions": {
+      "half": { "price": 100 },
+      "full": { "price": 170 }
+    }
+  }
+]

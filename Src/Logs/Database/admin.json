@@ -1,0 +1,17 @@
+[
+    {
+        "username": "piyush",
+        "password": "12345",
+        "contact": "1234567890",
+        "address": "noida",
+        "email": "ab@gmail.com"
+    },
+    
+    {
+        "username": "mahak",
+        "password": "1234567890",
+        "contact": "1234567899",
+        "address": "new delhi",
+        "email": "mahak@gmail.com"
+    }
+]
