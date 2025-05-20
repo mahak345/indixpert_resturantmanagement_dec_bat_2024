@@ -5,6 +5,8 @@ from Src.Authentication.exit_program import exit_program
 def main():
     print("Welcome to the Vegetarian Restaurant Management System!")
 
+    is_logged_in = False
+
     while True:
         print("\nMain Menu")
         print("1. Sign Up")

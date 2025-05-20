@@ -1,24 +1,38 @@
 import json
 import os
 
+USER_DB = "Src/logs/Database/admin.json"
+
+def is_valid_username(username):
+    return username.isalpha()
+
+def is_valid_password(password):
+    return password.isdigit()
+
 def sign_in():
-    print("\n--- Sign In ---")
-    username = input("Enter your username: ")
-    password = input("Enter your password: ")
-
-    users_file = 'database/users.json'
-
-    if not os.path.exists(users_file):
-        print("No user database found. Please sign up first.")
+    if not os.path.exists(USER_DB):
+        print("No users found. Please sign up first.")
         return False
 
-    with open(users_file, 'r') as f:
+    username = input("Enter username: ").strip()
+    password = input("Enter password: ").strip()
+
+    if not is_valid_username(username):
+        print("Invalid username! Only alphabetic characters are allowed.")
+        return False
+
+    if not is_valid_password(password):
+        print("Invalid password! Only numeric digits are allowed.")
+        return False
+
+    with open(USER_DB, 'r') as f:
         users = json.load(f)
-
+ 
+ 
+ 
     for user in users:
-        if user['username'] == username and user['password'] == password:
-            print("Sign in successful!")
+       if user['username'] == username and user['password'] == password:
+            print("Login successful!")
             return True
-
-    print("Invalid username or password.")
+    print("Invalid username or password")
     return False

@@ -2,43 +2,68 @@ import json
 import os
 import re
 
-USERS_FILE = "users.json"
+USER_DB = "Src/logs/Database/admin.json"
 
-def load_users():
-    if not os.path.exists(USERS_FILE):
-        return []
-    with open(USERS_FILE, "r") as f:
-        return json.load(f)
+def is_valid_username(username):
+    return username.isalpha()
 
-def save_users(users):
-    with open(USERS_FILE, "w") as f:
-        json.dump(users, f, indent=2)
+def is_valid_password(password):
+    return password.isdigit()
+
+def is_valid_contact(contact):
+    return contact.isdigit() and len(contact) == 10
+
+def is_valid_email(email):
+    pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    return re.match(pattern, email)
 
 def sign_up():
-    print("\n--- Sign Up ---")
-    username = input("Enter a new username: ")
-    password = input("Enter a new password: ")
-    contact = input("Enter your contact number: ")
-    address = input("Enter your address (max 100 chars): ")
-    if len(address) > 100:
-        address = address[:100]
-        print("Address truncated to 100 characters.")
-    email = input("Enter your email: ")
-    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+    if not os.path.exists(USER_DB):
+        with open(USER_DB, 'w') as f:
+            json.dump([], f)
+
+    username = input("Enter username (alphabets only): ").strip()
+    password = input("Enter password (digits only): ").strip()
+    contact = input("Enter contact number (10 digits): ").strip()
+    address = input("Enter address: ").strip()
+    email = input("Enter email: ").strip()
+
+    if not is_valid_username(username):
+        print("Invalid username! Only alphabetic characters are allowed.")
+        return
+
+    if not is_valid_password(password):
+        print("Invalid password! Only numeric digits are allowed.")
+        return
+
+    if not is_valid_contact(contact):
+        print("Invalid contact! Must be exactly 10 digits.")
+        return
+
+    if not address:
+        print("Address cannot be empty.")
+        return
+
+    if not is_valid_email(email):
         print("Invalid email format.")
         return
 
-    users = load_users()
-    if any(u.get('username') == username for u in users):
-        print("Username already exists.")
-        return
+    with open(USER_DB, 'r') as f:
+        users = json.load(f)
+    for user in users:
+        if user['username'] == username:
+            print("Username already exists!")
+            return
 
     users.append({
-        "username": username,
-        "password": password,
-        "contact": contact,
-        "address": address,
-        "email": email
+        'username': username,
+        'password': password,
+        'contact': contact,
+        'address': address,
+        'email': email
     })
-    save_users(users)
-    print("Sign up successful!")
+
+    with open(USER_DB, 'w') as f:
+        json.dump(users, f, indent=4)
+
+    print("Sign-up successful!")
